@@ -1,0 +1,19 @@
+services: 
+  my-app:
+    build: .
+    ports: 
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+    depends_on:
+      - mongo-db
+    volumes:
+      - ./:/app:z
+      - /app/node_modules
+  mongo-db:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
